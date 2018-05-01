@@ -99,18 +99,184 @@ var config = {
           reconexion2.innerHTML = ultReconexion2;
       });
   });
-
-
-
-
+  
 puntos = 0;
 puntos2 = 0;
 
 
 estado1 = firebase.database().ref().child("torre_1/antena");
+estado2 = firebase.database().ref().child("torre_2/antena");
 
 estado1.on("value", function (snaptshot) {
     estado1 = snaptshot.val();
     console.log(estado1);
-    
+    mostrarPing.innerHTML = estado1;
 });
+
+estado2.on("value", function (snaptshot) {
+    estado2 = snaptshot.val();
+    console.log(estado2);
+    mostrarPing2.innerHTML = estado2;
+});
+
+
+function actualizaGrafico() {
+    var fecha = new Date();
+    var horas = fecha.getHours();
+    if (horas < 10) {
+        horas = "0" + horas;
+    }
+    var minutos = fecha.getMinutes();
+    if (minutos < 10) {
+        minutos = "0" + minutos;
+    }
+    var segundos = fecha.getSeconds();
+    if (segundos < 10) {
+        segundos = "0" + segundos;
+    }
+    hora = horas + ":" + minutos + ":" + segundos;
+    datos.innerHTML = hora;
+
+    if (estado1 != "En Linea") {
+        addData(myChart, hora, 0);
+    }
+    else {
+        addData(myChart, hora, 1);
+    }
+
+    if (estado2 != "En Linea") {
+        addData(myChart2, hora, 0);
+    }
+    else {
+        addData(myChart2, hora, 1);
+    }
+}
+
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Ping Conectodos',
+            // data: [1, 1, 1, 0, 1, 0],
+            data: [],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Torre 1 - Fibra Óptica Paraíso'
+        },
+        scales: {
+            yAxes: [{
+                
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart2 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Ping Conectodos',
+             data: [],
+            //data: [],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Torre 2 - Fibra Óptica Comalcalco'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+function addData(chart, label, data) {
+    puntos++;
+    // console.log(puntos);
+    chart.data.labels.push(label);
+    if (puntos > 50) {
+        chart.data.labels.splice(0, 1);
+    }
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+        if (puntos > 50) {
+            dataset.data.splice(0, 1);
+        }
+    });
+    if (puntos > 50) {
+        puntos--;
+    }
+    chart.update();
+}
+
+
+function addData2(chart, label, data) {
+    puntos2++;
+    // console.log(puntos2);
+    chart.data.labels.push(label);
+    if (puntos2 > 50) {
+        chart.data.labels.splice(0, 1);
+    }
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+        if (puntos2 > 50) {
+            dataset.data.splice(0, 1);
+        }
+    });
+    if (puntos2 > 50) {
+        puntos2--;
+    }
+    chart.update();
+}
