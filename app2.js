@@ -56,7 +56,6 @@ var fecha = new Date();
         dato1.on("value", function (snaptshot) {
             dato1 = snaptshot.val();
             datosDesconexion(dato1, index);
-            // construirTabla1(index);
             console.log(dato1);
             console.log(posicion);
             var tabla = document.getElementById("tabla");
