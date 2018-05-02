@@ -72,8 +72,14 @@ var fecha = new Date();
             var tabla3 = document.getElementById("tabla3");
             var fila3 = tabla3.insertRow(index);
             var celda3 = fila3.insertCell(0);
-            celda3.innerHTML = total2[index]; 
+            var tiempoFuera = total2[index] - total2[index];
+            
 
+            var a = new Date("May 2, 2018 " +  total2[index]);
+            var b = new Date("May 2, 2018 " +  total1[index]);
+            var c = (a-b)/1000;
+            console.log("tiempo Fuera: " + c);
+            celda3.innerHTML = c + " seg"; 
             
         });
     }
