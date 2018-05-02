@@ -43,13 +43,7 @@ var fecha = new Date();
     numDesconexion.innerHTML = desconexiones;
 
     for (let index = 0; index < desconexiones; index++) {
-        console.log(index);
-        // var x = document.getElementById("tabla");
-        // var fila = tabla.insertRow(index);
-        // // var celda1 = fila.insertCell(0);
-        // // var celda2 = fila.insertCell(1);
-        // var celda3 = fila.insertCell(2);
-    
+        // console.log(index);
         var posicion = index + 1;
         var dato1 = firebase.database().ref().child("torre_1/desconexion/" + dia + "/" + posicion ); 
     
@@ -62,6 +56,7 @@ var fecha = new Date();
             var fila = tabla.insertRow(index);
             var celda1 = fila.insertCell(0);
             celda1.innerHTML = total1[index]; 
+
         });
 
         var dato2 = firebase.database().ref().child("torre_1/reconexion/" + dia + "/" + posicion ); 
@@ -73,6 +68,12 @@ var fecha = new Date();
             var fila = tabla.insertRow(index);
             var celda2 = fila.insertCell(0);
             celda2.innerHTML = total2[index]; 
+
+            var tabla3 = document.getElementById("tabla3");
+            var fila3 = tabla3.insertRow(index);
+            var celda3 = fila3.insertCell(0);
+            celda3.innerHTML = total2[index]; 
+
             
         });
     }
@@ -83,8 +84,8 @@ var fecha = new Date();
   
 
 var datosDesconexion = function (dato1, index) {
-   console.log("datos: " + dato1);
-   console.log("index: " + index);
+//    console.log("datos: " + dato1);
+//    console.log("index: " + index);
    total1.push(dato1);
    console.log(total1);
    return;
@@ -93,8 +94,8 @@ var datosDesconexion = function (dato1, index) {
 
 
 var datosConexion = function (dato2, index) {
-    console.log("datos2: " + dato2);
-    console.log("index: " + index);
+    // console.log("datos2: " + dato2);
+    // console.log("index: " + index);
     total2.push(dato2);
     console.log(total2);
     
