@@ -13,6 +13,7 @@ var config = {
 
 var hoy = document.getElementById("hoy");  
 var numDesconexion = document.getElementById("numDesconexion");
+var totalDesconexion =document.getElementById("totalDesconexion");
 
 var hora = "horas";
 var contenido;
@@ -23,6 +24,7 @@ var datosRec;
 var datosDesc;
 var total1 = new Array();
 var total2 = new Array();;
+var tiempoTotalFuera = 0;
 
 var fecha = new Date();
   var mes = fecha.getMonth() + 1;
@@ -79,8 +81,9 @@ var fecha = new Date();
             var b = new Date("May 2, 2018 " +  total1[index]);
             var c = (a-b)/1000;
             console.log("tiempo Fuera: " + c);
-            celda3.innerHTML = c + " seg"; 
             
+            celda3.innerHTML = c + " seg"; 
+            tiempoDesconectado(c);
         });
     }
 
@@ -106,8 +109,14 @@ var datosConexion = function (dato2, index) {
     console.log(total2);
     
    return;
-}
+};
 
-
+var tiempoDesconectado = function (c) {
+    console.log(c);
+    
+    tiempoTotalFuera = tiempoTotalFuera + c;
+    totalDesconexion.innerHTML = tiempoTotalFuera + " seg";
+    return;
+};
 
 
