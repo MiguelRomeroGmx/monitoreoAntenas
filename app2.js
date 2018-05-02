@@ -111,7 +111,8 @@ var fecha = new Date();
         });
     }
 
-  
+
+
 
   });
   
@@ -169,8 +170,8 @@ if (y < 80) {
 
 var oilData = {
     labels: [
-        "En Linea",
-        "Sin Conexion",
+        "Conectado: " + y +"%",
+        "Desconectado: " + x + "%",
     ],
     datasets: [
         {
