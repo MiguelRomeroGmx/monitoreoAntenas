@@ -140,9 +140,17 @@ var tiempoDesconectado = function (c) {
     tiempoTotalFuera = tiempoTotalFuera + c;
     totalDesconexion.innerHTML = tiempoTotalFuera + " seg";
 
-
+    graficar();
     return;
 };
+
+
+var graficar = function () {
+    
+var x = (100 * (tiempoTotalFuera)/(segundosTotales));
+console.log("porcentaje x: " + x);
+
+var y = 100 - x;
 
 
 var oilData = {
@@ -152,18 +160,22 @@ var oilData = {
     ],
     datasets: [
         {
-            data: [133.3, 86.2],
+            data: [y, x],
             backgroundColor: [
                 "#FFA500",
                 "#000000",
                 // "#84FF63",
                 // "#8463FF",
                 // ""
-            ]
+            ],
+            borderColor: "white",
+            borderWidth: 1
         }]
 };
 
 var pieChart = new Chart(oilCanvas, {
-  type: 'doughnut',
+  type: 'pie',
   data: oilData
 });
+
+}
