@@ -99,7 +99,7 @@ var config = {
           reconexion2.innerHTML = ultReconexion2;
       });
   });
-  
+
 puntos = 0;
 puntos2 = 0;
 
@@ -184,7 +184,7 @@ var myChart = new Chart(ctx, {
     options: {
         title: {
             display: true,
-            text: 'Torre 1 - Fibra Óptica Paraíso'
+            text: 'Torre 1 - Fibra Optica Paraiso'
         },
         scales: {
             yAxes: [{
@@ -229,7 +229,7 @@ var myChart2 = new Chart(ctx, {
     options: {
         title: {
             display: true,
-            text: 'Torre 2 - Fibra Óptica Comalcalco'
+            text: 'Torre 2 - Fibra Optica Comalcalco'
         },
         scales: {
             yAxes: [{
