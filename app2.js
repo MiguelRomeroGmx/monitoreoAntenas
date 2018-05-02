@@ -13,7 +13,8 @@ var config = {
 
 var hoy = document.getElementById("hoy");  
 var numDesconexion = document.getElementById("numDesconexion");
-var totalDesconexion =document.getElementById("totalDesconexion");
+var totalDesconexion = document.getElementById("totalDesconexion");
+var horaConsulta = document.getElementById("horaConsulta");
 
 var hora = "horas";
 var contenido;
@@ -38,6 +39,23 @@ var fecha = new Date();
   dia = dias + "-" + mes + "-" + fecha.getFullYear();
 
   hoy.innerHTML = dia;
+
+  var fecha = new Date();
+    var horas = fecha.getHours();
+    if (horas < 10) {
+        horas = "0" + horas;
+    }
+    var minutos = fecha.getMinutes();
+    if (minutos < 10) {
+        minutos = "0" + minutos;
+    }
+    var segundos = fecha.getSeconds();
+    if (segundos < 10) {
+        segundos = "0" + segundos;
+    }
+    hora = horas + ":" + minutos + ":" + segundos;
+    horaConsulta.innerHTML = hora;
+
   var desconexiones = firebase.database().ref().child("torre_1/desconexion/" + dia + "/contador");
 
   desconexiones.on("value", function (snaptshot) {
