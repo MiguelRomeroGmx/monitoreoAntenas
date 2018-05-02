@@ -16,6 +16,10 @@ var numDesconexion = document.getElementById("numDesconexion");
 var totalDesconexion = document.getElementById("totalDesconexion");
 var horaConsulta = document.getElementById("horaConsulta");
 var oilCanvas = document.getElementById("oilChart");
+var seg = document.getElementById("seg");
+var min = document.getElementById("min");
+var hrs = document.getElementById("hrs");
+var control;
 
 var hora = "horas";
 var contenido;
@@ -66,10 +70,22 @@ var fecha = new Date();
 
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
+
     numDesconexion.innerHTML = desconexiones;
+    // numDesconexionDetalle.innerHTML = numDesconexion;
+    // desconexiones = numDesconexion;
+
+    if (control == 1) {
+        
+        control = 0;
+    }
+    else{
+
+   
 
     for (let index = 0; index < desconexiones; index++) {
         // console.log(index);
+        control = 1;
         var posicion = index + 1;
         var dato1 = firebase.database().ref().child("torre_1/desconexion/" + dia + "/" + posicion ); 
     
@@ -111,7 +127,7 @@ var fecha = new Date();
         });
     }
 
-
+ }
 
 
   });
@@ -140,7 +156,13 @@ var tiempoDesconectado = function (c) {
     console.log(c);
     tiempoTotalFuera = tiempoTotalFuera + c;
     totalDesconexion.innerHTML = tiempoTotalFuera + " seg";
-
+    seg.innerHTML = tiempoTotalFuera + " seg";
+    var tMin = (tiempoTotalFuera/60);
+    tMin = tMin.toFixed(2);
+    min.innerHTML = tMin + " min";
+    var tHoras = tiempoTotalFuera / 3600;
+    tHoras = tHoras.toFixed(2);
+    hrs.innerHTML = tHoras + " hrs";
     graficar();
     return;
 };
@@ -157,14 +179,20 @@ y = y.toFixed(2);
 
 if (y > 97) {
     $("#ok").removeClass("gris"); 
+    $("#advertencia").addClass("gris"); 
+    $("#error").addClass("gris"); 
 }
 
 if (y > 80 && y < 97) {
     $("#advertencia").removeClass("gris"); 
+    $("#error").addClass("gris"); 
+    $("#ok").addClass("gris"); 
 }
 
 if (y < 80) {
     $("#error").removeClass("gris"); 
+    $("#ok").addClass("gris"); 
+    $("#advertencia").addClass("gris"); 
 }
 
 
