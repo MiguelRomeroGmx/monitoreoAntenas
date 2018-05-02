@@ -26,6 +26,7 @@ var datosDesc;
 var total1 = new Array();
 var total2 = new Array();;
 var tiempoTotalFuera = 0;
+var segundosTotales;
 
 var fecha = new Date();
   var mes = fecha.getMonth() + 1;
@@ -55,6 +56,10 @@ var fecha = new Date();
     }
     hora = horas + ":" + minutos + ":" + segundos;
     horaConsulta.innerHTML = hora;
+
+    segundosTotales = (horas * 3600) + (minutos * 60) + segundos;
+    console.log("Segundos Totales: " + segundosTotales);
+    
 
   var desconexiones = firebase.database().ref().child("torre_1/desconexion/" + dia + "/contador");
 
