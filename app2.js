@@ -15,6 +15,7 @@ var hoy = document.getElementById("hoy");
 var numDesconexion = document.getElementById("numDesconexion");
 var totalDesconexion = document.getElementById("totalDesconexion");
 var horaConsulta = document.getElementById("horaConsulta");
+var oilCanvas = document.getElementById("oilChart");
 
 var hora = "horas";
 var contenido;
@@ -136,10 +137,33 @@ var datosConexion = function (dato2, index) {
 
 var tiempoDesconectado = function (c) {
     console.log(c);
-    
     tiempoTotalFuera = tiempoTotalFuera + c;
     totalDesconexion.innerHTML = tiempoTotalFuera + " seg";
+
+
     return;
 };
 
 
+var oilData = {
+    labels: [
+        "En Linea",
+        "Sin Conexion",
+    ],
+    datasets: [
+        {
+            data: [133.3, 86.2],
+            backgroundColor: [
+                "#FFA500",
+                "#000000",
+                // "#84FF63",
+                // "#8463FF",
+                // ""
+            ]
+        }]
+};
+
+var pieChart = new Chart(oilCanvas, {
+  type: 'doughnut',
+  data: oilData
+});
