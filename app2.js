@@ -154,6 +154,19 @@ console.log("porcentaje x: " + x);
 var y = 100 - x;
 y = y.toFixed(2);
 
+if (y > 97) {
+    $("#ok").removeClass("gris"); 
+}
+
+if (y > 80 && y < 97) {
+    $("#advertencia").removeClass("gris"); 
+}
+
+if (y < 80) {
+    $("#error").removeClass("gris"); 
+}
+
+
 var oilData = {
     labels: [
         "En Linea",
