@@ -148,10 +148,11 @@ var tiempoDesconectado = function (c) {
 var graficar = function () {
     
 var x = (100 * (tiempoTotalFuera)/(segundosTotales));
+x = x.toFixed(2);
 console.log("porcentaje x: " + x);
 
 var y = 100 - x;
-
+y = y.toFixed(2);
 
 var oilData = {
     labels: [

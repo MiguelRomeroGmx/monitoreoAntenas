@@ -27,3 +27,28 @@ h6, label{
 .tablas{
   text-align: center;
 }
+
+.efectividad{
+  margin: 20px;
+}
+
+.logoEfectividad{
+  text-align: center;
+  /* color: green; */
+}
+
+.ok{
+  color: green;
+}
+
+.advertencia{
+  color:gold;
+}
+
+.error{
+  color: red;
+}
+
+.gris{
+  color: #BDBDBD;
+}
