@@ -12,8 +12,8 @@ var config = {
 
 
 var hoy = document.getElementById("hoy");  
-var numDesconexion = document.getElementById("numDesconexion");
-var totalDesconexion = document.getElementById("totalDesconexion");
+var numDesconexionDetalle = document.getElementById("numDesconexionDetalle");
+var totalDesconexionDetalle = document.getElementById("totalDesconexionDetalle");
 var horaConsulta = document.getElementById("horaConsulta");
 var oilCanvas = document.getElementById("oilChart");
 var seg = document.getElementById("seg");
@@ -71,18 +71,18 @@ var fecha = new Date();
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
 
-    numDesconexion.innerHTML = desconexiones;
+    numDesconexionDetalle.innerHTML = desconexiones;
     // numDesconexionDetalle.innerHTML = numDesconexion;
     // desconexiones = numDesconexion;
 
     if (control == 1) {
         
-        control = 0;
+        control = 1;
     }
     else{
 
    
-
+// desconexiones
     for (let index = 0; index < desconexiones; index++) {
         // console.log(index);
         control = 1;
@@ -155,7 +155,7 @@ var datosConexion = function (dato2, index) {
 var tiempoDesconectado = function (c) {
     console.log(c);
     tiempoTotalFuera = tiempoTotalFuera + c;
-    totalDesconexion.innerHTML = tiempoTotalFuera + " seg";
+    totalDesconexionDetalle.innerHTML = tiempoTotalFuera + " seg";
     seg.innerHTML = tiempoTotalFuera + " seg";
     var tMin = (tiempoTotalFuera/60);
     tMin = tMin.toFixed(2);
