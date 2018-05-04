@@ -13,29 +13,40 @@ var config = {
   var hora;
   var desconexion = document.getElementById("ultDesconexion");
   var desconexion2 = document.getElementById("ultDesconexion2");
+  var desconexion3 = document.getElementById("ultDesconexion3");
   var reconexion = document.getElementById("reconexion");
   var reconexion2 = document.getElementById("reconexion2");
+  var reconexion3 = document.getElementById("reconexion3");
   var totalDesconexion = document.getElementById("totalDesconexion");
   var totalDesconexion2 = document.getElementById("totalDesconexion2");
+  var totalDesconexion3 = document.getElementById("totalDesconexion3");
 
   var puntos;
   var puntos2;
+  var puntos3;
   var control;
   var control2;
+  var control3;
   var numDesconexion;
   var numReconexion;
   var numDesconexion2;
   var numReconexion2;
+  var numDesconexion3;
+  var numReconexion3;
   var controlUltDesconexion;
   var controlUltDesconexion2;
+  var controlUltDesconexion3;
   var dia;
   var estado1;
   var estado2;
+  var estado3;
 
   var mostrarPing = document.getElementById("mostrarPing");
   var datos = document.getElementById("datos");
   var mostrarPing2 = document.getElementById("mostrarPing2");
   var datos2 = document.getElementById("datos2");
+  var mostrarPing3 = document.getElementById("mostrarPing3");
+  var datos3 = document.getElementById("datos3");
 
 //   var ping = firebase.database().ref().child("torre_1/dato");
 //   var ping2 = firebase.database().ref().child("torre_2/dato");
@@ -55,6 +66,8 @@ var config = {
   numReconexion = firebase.database().ref().child("torre_1/reconexion/" + dia + "/contador");
   numDesconexion2 = firebase.database().ref().child("torre_2/desconexion/" + dia + "/contador");
   numReconexion2 = firebase.database().ref().child("torre_2/reconexion/" + dia + "/contador");
+  numDesconexion3 = firebase.database().ref().child("torre_3/desconexion/" + dia + "/contador");
+  numReconexion3 = firebase.database().ref().child("torre_3/reconexion/" + dia + "/contador");
 
 
   numDesconexion.on("value", function (snaptshot) {
@@ -100,12 +113,37 @@ var config = {
       });
   });
 
+numDesconexion3.on("value", function (snaptshot) {
+      numDesconexion3 = snaptshot.val();
+      totalDesconexion3.innerHTML = numDesconexion3;
+      ultDesconexion3 = firebase.database().ref().child("torre_3/desconexion/" + dia + "/" + numDesconexion3);
+
+      ultDesconexion3.on("value", function (snaptshot) {
+          ultDesconexion3 = snaptshot.val();
+          desconexion3.innerHTML = ultDesconexion3;
+      });
+
+  });
+
+  numReconexion3.on("value", function (snaptshot) {
+      numReconexion3 = snaptshot.val();
+      ultReconexion3 = firebase.database().ref().child("torre_3/reconexion/" + dia + "/" + numReconexion3);
+
+      ultReconexion3.on("value", function (snaptshot) {
+          ultReconexion3 = snaptshot.val();
+          reconexion3.innerHTML = ultReconexion3;
+      });
+  });
+
+
 puntos = 0;
 puntos2 = 0;
+puntos3 = 0;
 
 
 estado1 = firebase.database().ref().child("torre_1/antena");
 estado2 = firebase.database().ref().child("torre_2/antena");
+estado3 = firebase.database().ref().child("torre_3/antena");
 
 estado1.on("value", function (snaptshot) {
     estado1 = snaptshot.val();
@@ -117,6 +155,12 @@ estado2.on("value", function (snaptshot) {
     estado2 = snaptshot.val();
     console.log(estado2);
     mostrarPing2.innerHTML = estado2;
+});
+
+estado3.on("value", function (snaptshot) {
+    estado3 = snaptshot.val();
+    console.log(estado3);
+    mostrarPing3.innerHTML = estado3;
 });
 
 
@@ -149,6 +193,12 @@ function actualizaGrafico() {
     }
     else {
         addData(myChart2, hora, 1);
+    }
+    if (estado3 != "En Linea") {
+        addData(myChart3, hora, 0);
+    }
+    else {
+        addData(myChart3, hora, 1);
     }
 }
 
@@ -242,6 +292,51 @@ var myChart2 = new Chart(ctx, {
 });
 
 
+var ctx = document.getElementById("myChart3").getContext('2d');
+var myChart3 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Ping Conectodos',
+             data: [],
+            //data: [],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Torre 3 - Nicolas Bravo'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+
 function addData(chart, label, data) {
     puntos++;
     // console.log(puntos);
@@ -277,6 +372,25 @@ function addData2(chart, label, data) {
     });
     if (puntos2 > 50) {
         puntos2--;
+    }
+    chart.update();
+}
+
+function addData3(chart, label, data) {
+    puntos3++;
+    // console.log(puntos2);
+    chart.data.labels.push(label);
+    if (puntos3 > 50) {
+        chart.data.labels.splice(0, 1);
+    }
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+        if (puntos3 > 50) {
+            dataset.data.splice(0, 1);
+        }
+    });
+    if (puntos3 > 50) {
+        puntos3--;
     }
     chart.update();
 }
