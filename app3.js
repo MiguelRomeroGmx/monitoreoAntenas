@@ -66,7 +66,7 @@ var fecha = new Date();
     console.log("Segundos Totales: " + segundosTotales);
     
 
-  var desconexiones = firebase.database().ref().child("torre_1/desconexion/" + dia + "/contador");
+  var desconexiones = firebase.database().ref().child("torre_2/desconexion/" + dia + "/contador");
 
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
@@ -87,7 +87,7 @@ var fecha = new Date();
         // console.log(index);
         control = 1;
         var posicion = index + 1;
-        var dato1 = firebase.database().ref().child("torre_1/desconexion/" + dia + "/" + posicion ); 
+        var dato1 = firebase.database().ref().child("torre_2/desconexion/" + dia + "/" + posicion ); 
     
         dato1.on("value", function (snaptshot) {
             dato1 = snaptshot.val();
@@ -101,7 +101,7 @@ var fecha = new Date();
 
         });
 
-        var dato2 = firebase.database().ref().child("torre_1/reconexion/" + dia + "/" + posicion ); 
+        var dato2 = firebase.database().ref().child("torre_2/reconexion/" + dia + "/" + posicion ); 
     
         dato2.on("value", function (snaptshot) {
             dato2 = snaptshot.val();
