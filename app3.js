@@ -65,7 +65,7 @@ var fecha = new Date();
     segundosTotales = (horas * 3600) + (minutos * 60) + segundos;
     console.log("Segundos Totales: " + segundosTotales);
     
-
+// Numero de desconexiones
   var desconexiones = firebase.database().ref().child("torre_2/desconexion/" + dia + "/contador");
 
   desconexiones.on("value", function (snaptshot) {
@@ -169,7 +169,7 @@ var tiempoDesconectado = function (c) {
 
 
 var graficar = function () {
-    
+   // semaforo de calidad de transmision 
 var x = (100 * (tiempoTotalFuera)/(segundosTotales));
 x = x.toFixed(2);
 console.log("porcentaje x: " + x);

@@ -170,7 +170,7 @@ var tiempoDesconectado = function (c) {
 
 
 var graficar = function () {
-    
+    // semaforo de calidad de transmision
 var x = (100 * (tiempoTotalFuera)/(segundosTotales));
 x = x.toFixed(2);
 console.log("porcentaje x: " + x);
