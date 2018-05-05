@@ -65,7 +65,7 @@ var fecha = new Date();
     segundosTotales = (horas * 3600) + (minutos * 60) + segundos;
     console.log("Segundos Totales: " + segundosTotales);
     
-
+// Numero de desconexiones
   var desconexiones = firebase.database().ref().child("torre_1/desconexion/" + dia + "/contador");
 
   desconexiones.on("value", function (snaptshot) {
@@ -83,6 +83,7 @@ var fecha = new Date();
 
    
 // desconexiones
+// obteniendo datos
     for (let index = 0; index < desconexiones; index++) {
         // console.log(index);
         control = 1;
