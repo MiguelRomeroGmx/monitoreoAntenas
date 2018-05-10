@@ -110,12 +110,22 @@ var config = {
 
   numDesconexion2.on("value", function (snaptshot) {
       numDesconexion2 = snaptshot.val();
-      totalDesconexion2.innerHTML = numDesconexion2;
+      if (numDesconexion2 != null) {
+          totalDesconexion2.innerHTML = numDesconexion2;
+      }else{
+          totalDesconexion2.innerHTML = 0;
+      }
+      
       ultDesconexion2 = firebase.database().ref().child("torre_2/desconexion/" + dia + "/" + numDesconexion2);
 
       ultDesconexion2.on("value", function (snaptshot) {
           ultDesconexion2 = snaptshot.val();
-          desconexion2.innerHTML = ultDesconexion2;
+          if (ultDesconexion2 != null) {
+              desconexion2.innerHTML = ultDesconexion2;
+          }else{
+              desconexion2.innerHTML = "Sin desconexiones";
+          }
+          
       });
 
   });
@@ -126,18 +136,33 @@ var config = {
 
       ultReconexion2.on("value", function (snaptshot) {
           ultReconexion2 = snaptshot.val();
-          reconexion2.innerHTML = ultReconexion2;
+          if (ultReconexion2 != null) {
+              reconexion2.innerHTML = ultReconexion2;
+          }else{
+              reconexion2.innerHTML = "Sin Reconexion";
+          }
+          
       });
   });
 
 numDesconexion3.on("value", function (snaptshot) {
       numDesconexion3 = snaptshot.val();
-      totalDesconexion3.innerHTML = numDesconexion3;
+      if (numDesconexion3 != null) {
+          totalDesconexion3.innerHTML = numDesconexion3;
+      }else{
+          totalDesconexion3.innerHTML = 0;
+      }
+      
       ultDesconexion3 = firebase.database().ref().child("torre_3/desconexion/" + dia + "/" + numDesconexion3);
 
       ultDesconexion3.on("value", function (snaptshot) {
           ultDesconexion3 = snaptshot.val();
-          desconexion3.innerHTML = ultDesconexion3;
+          if (ultDesconexion3 != null) {
+              desconexion3.innerHTML = ultDesconexion3;
+          }else{
+              desconexion3.innerHTML = "Sin desconexiones";
+          }
+          
       });
 
   });
@@ -148,7 +173,12 @@ numDesconexion3.on("value", function (snaptshot) {
 
       ultReconexion3.on("value", function (snaptshot) {
           ultReconexion3 = snaptshot.val();
-          reconexion3.innerHTML = ultReconexion3;
+          if (ultReconexion3 != null) {
+              reconexion3.innerHTML = ultReconexion3;
+          }else{
+              reconexion3.innerHTML = "Sin Reconexion";
+          }
+          
       });
   });
 
