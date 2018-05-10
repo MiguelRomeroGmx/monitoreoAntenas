@@ -21,6 +21,8 @@ var min = document.getElementById("min");
 var hrs = document.getElementById("hrs");
 var control;
 
+
+
 var hora = "horas";
 var contenido;
 var agregar;
@@ -70,8 +72,13 @@ var fecha = new Date();
 
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
-
+    console.log(desconexiones);
+    if (desconexiones != null) {
     numDesconexionDetalle.innerHTML = desconexiones;
+    }
+    else{
+        numDesconexionDetalle.innerHTML = 0;
+    }
     // numDesconexionDetalle.innerHTML = numDesconexion;
     // desconexiones = numDesconexion;
 

@@ -21,6 +21,9 @@ var min = document.getElementById("min");
 var hrs = document.getElementById("hrs");
 var control;
 
+
+
+
 var hora = "horas";
 var contenido;
 var agregar;
@@ -61,17 +64,25 @@ var fecha = new Date();
     }
     hora = horas + ":" + minutos + ":" + segundos;
     horaConsulta.innerHTML = hora;
-
+    //numDesconexionDetalle.innerHTML = 0; 
     segundosTotales = (horas * 3600) + (minutos * 60) + segundos;
-    console.log("Segundos Totales: " + segundosTotales);
+    console.log("Segundos Total: " + segundosTotales);
     
 // Numero de desconexiones
   var desconexiones = firebase.database().ref().child("torre_1/desconexion/" + dia + "/contador");
-
+    
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
-
+    console.log(desonexiones);
+    
+    
+    if (desconexiones != null) {
     numDesconexionDetalle.innerHTML = desconexiones;
+    }
+    else{
+        numDesconexionDetalle.innerHTML = 0;
+    }
+     
     // numDesconexionDetalle.innerHTML = numDesconexion;
     // desconexiones = numDesconexion;
 

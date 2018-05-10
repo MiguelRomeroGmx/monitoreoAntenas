@@ -71,7 +71,12 @@ var fecha = new Date();
   desconexiones.on("value", function (snaptshot) {
     desconexiones = snaptshot.val();
 
+    if (desconexiones != null) {
     numDesconexionDetalle.innerHTML = desconexiones;
+    }
+    else{
+        numDesconexionDetalle.innerHTML = 0;
+    }
     // numDesconexionDetalle.innerHTML = numDesconexion;
     // desconexiones = numDesconexion;
 
