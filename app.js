@@ -72,12 +72,24 @@ var config = {
 
   numDesconexion.on("value", function (snaptshot) {
       numDesconexion = snaptshot.val();
+      if (numDesconexion != null) {
+          
+      
       totalDesconexion.innerHTML = numDesconexion;
+      }
+      else{
+          totalDesconexion.innerHTML = 0;
+      }
       ultDesconexion = firebase.database().ref().child("torre_1/desconexion/" + dia + "/" + numDesconexion);
       
       ultDesconexion.on("value", function (snaptshot) {
         ultDesconexion = snaptshot.val();
+        if (ultDesconexion != null) {
         desconexion.innerHTML = ultDesconexion;
+        }
+        else{
+            desconexion.innerHTML = "Sin desconexiones";
+        }
     });
   });
 
@@ -87,7 +99,12 @@ var config = {
 
       ultReconexion.on("value", function (snaptshot) {
           ultReconexion = snaptshot.val();
+          if (ultReconexion != null) {
           reconexion.innerHTML = ultReconexion;
+           }
+           else{
+               reconexion.innerHTML = "Sin Reconexion";
+           }
       });
   });
 
